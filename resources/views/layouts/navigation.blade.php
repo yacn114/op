@@ -18,6 +18,12 @@
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                         {{ "home" }}
                     </x-nav-link>
+                    <x-nav-link :href="route('show-p')" :active="request()->routeIs('show-p')">
+                        {{ "show posts" }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('show-c')" :active="request()->routeIs('show-c')">
+                        {{ "show categories" }}
+                    </x-nav-link>
                 </div>
             </div>
 

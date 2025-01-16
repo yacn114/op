@@ -4,10 +4,11 @@
 ## About this project
 
 a simple blog with laravel <a href="https://t.me/yacn_1414">yacn_1414</a>
+## my todos
 <ul>
-<li>update posts</li>
-<li>update category</li>
-<li>add user to posts</li>
+<li>page update delete role</li>
+<li>sort web.php add middleware</li>
 <li>single post and posts on home page</li>
+<li>delete blades</li>
 
 </ul>

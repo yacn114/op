@@ -17,6 +17,7 @@ $category = Category::all();
                     <h2 class="text-lg font-medium text-gray-900">
                         {{ 'you are login with : '. Auth::user()->name }}
                     </h2>
+                    
                 </div>
             </div>    
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -62,6 +63,7 @@ $category = Category::all();
                             </option>
                         @endforeach
                     </select>
+                    
                     <div class="flex items-center gap-4">
                         <x-primary-button>{{ "create" }}</x-primary-button>
             
