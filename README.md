@@ -4,3 +4,10 @@
 ## About this project
 
 a simple blog with laravel <a href="https://t.me/yacn_1414">yacn_1414</a>
+<ul>
+<li>update posts</li>
+<li>update category</li>
+<li>add user to posts</li>
+<li>single post and posts on home page</li>
+
+</ul>
