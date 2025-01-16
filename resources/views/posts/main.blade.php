@@ -88,15 +88,25 @@
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto">
                             <a href="/" class="nav-item nav-link active">Home</a>
-                            <div class="nav-item dropdown">
+                            {{-- <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">create menu</a>
                                 <div class="dropdown-menu">
                                     <a href="{{ route('post-index') }}" class="dropdown-item">post home</a>
                                     <a href="{{route('cat-index')}}" class="dropdown-item">category home</a>
                                 </div>
                             </div>
-                            <a href="single-page.html" class="nav-item nav-link">Single Page</a>
-                            <a href="contact.html" class="nav-item nav-link">Contact Us</a>
+                             --}}
+                            @auth
+                            <a href="{{route('dashboard')}}" class="nav-item nav-link">dashboard</a>
+
+                            <a href="{{route('logout')}}" class="nav-item nav-link">Logout</a>
+
+                            @else
+
+                            <a href="{{route('Login')}}" class="nav-item nav-link">Login</a>
+                            <a href="{{route('Register')}}" class="nav-item nav-link">Register</a>
+
+                            @endauth
                         </div>
                         <div class="social ml-auto">
                             <a href=""><i class="fab fa-twitter"></i></a>
