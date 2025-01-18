@@ -46,5 +46,8 @@ class PostController extends Controller
             return redirect()->route('show-p')->with('error','this post not yours');
         }
     }
+    public function sho(Post $post){
+        return view('posts.show',['post'=>$post]);
+    }
 }
 

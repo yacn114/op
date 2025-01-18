@@ -12,6 +12,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Models\Role;
+use GuzzleHttp\Middleware;
 
 // Start Dashboard
 Route::get('/dashboard', function () {

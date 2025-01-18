@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CategoryUpdateRequest;
 use App\Http\Requests\CategoryCreateRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\Permission;
 use App\Models\Category;
+use Illuminate\Routing\Middleware;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    #[Middleware(Permission::class .':read-category')]
     public function create(){
         return view("cat.cat");
     }
