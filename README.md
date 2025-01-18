@@ -6,9 +6,9 @@
 a simple blog with laravel <a href="https://t.me/yacn_1414">yacn_1414</a>
 ## my todos
 <ul>
-<li>page update delete role</li>
-<li>sort web.php add middleware</li>
 <li>single post and posts on home page</li>
-<li>delete blades</li>
+<li>اختصاص رول به کاربر</li>
+<li>function hasPermission</li>
+<li>make middleware</li>
 
 </ul>

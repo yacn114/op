@@ -24,6 +24,9 @@
                     <x-nav-link :href="route('show-c')" :active="request()->routeIs('show-c')">
                         {{ "show categories" }}
                     </x-nav-link>
+                    <x-nav-link :href="route('show-r')" :active="request()->routeIs('show-r')">
+                        {{ "show roles" }}
+                    </x-nav-link>
                 </div>
             </div>
 
