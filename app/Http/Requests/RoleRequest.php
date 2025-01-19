@@ -23,7 +23,7 @@ class RoleRequest extends FormRequest
     {
         return [
             "title"=> ["min:5","required","string","max:40"],
-            "Permission"=> ["array",'required'],
+            "Permission"=> ["array"],
             "Permission.*"=> ["exists:permissions,id"],
         ];
     }

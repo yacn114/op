@@ -16,22 +16,22 @@ class PermissionSeeder extends Seeder
     {
         Permission::query()->insert(
     [
-        ["title"=>"insert-category"],
+        ["title"=>"create-category"],
         ["title"=>"update-category"],
         ["title"=>"delete-category"],
         ["title"=>"read-category"],
         ["title"=>"update-post"],
         ["title"=>"delete-post"],
         ["title"=>"read-post"],
-        ["title"=>"insert-post"],
+        ["title"=>"create-post"],
         ["title"=>"update-user"],
         ["title"=>"delete-user"],
         ["title"=>"read-user"],
-        ["title"=>"insert-user"],
+        ["title"=>"create-user"],
         ["title"=>"update-role"],
         ["title"=>"delete-role"],
         ["title"=>"read-role"],
-        ["title"=>"insert-role"],
+        ["title"=>"create-role"],
     ]);
     $b = Role::query()->create([
         "name"=> "normal",

@@ -23,6 +23,12 @@ class RoleController extends Controller
     return view("role.edit",["role"=> $role]);
     }
     public function update(RoleRequest $request){
+        // if($request->validated("Permission") == null){
+        //     $s = [0];
+        // }else{
+        //     $s = $request->validated("Permission");
+        // }
+        // dd($s);
         $role = Role::where("name",$request->validated("title"))->first();
         $role->update(["name"=>$request->validated("title")]);
         $role->permissions()->sync($request->validated("Permission"));

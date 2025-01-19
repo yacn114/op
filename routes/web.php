@@ -34,10 +34,10 @@ Route::get('/','index')->name('home');
 
 // Start PostController
 Route::controller(PostController::class)->group(function () {
-    Route::get('/p','create')->name('post-index')->middleware('auth');
+    Route::get('/p','create')->name('post-index')->middleware('auth', App\Http\Middleware\Permission::class.':create-post');
     Route::get('/p/{post}','sho')->name('single');
-    Route::get('/pe/{post}','edit')->name('edit-post');
-    Route::patch('/pe/{post}','update')->name('post-update');
+    Route::get('/pe/{post}','edit')->name('edit-post')->middleware(App\Http\Middleware\Permission::class.':update-post');
+    Route::patch('/pe/{post}','update')->name('post-update')->middleware(App\Http\Middleware\Permission::class.':update-post');
     Route::get('/pd/{post}',function ($post ) {
         $post = Post::where('id', $post)->first();
         if (Auth::check() && Auth::user()->id == $post->user_id) {
@@ -45,9 +45,9 @@ Route::controller(PostController::class)->group(function () {
         return redirect()->back()->with('success','deleted your post');
         }else{
             return redirect()->back()->with('error','this post not yours, you cant delete this post');
-        }})->name('del-pos');
-    Route::post('/p','store')->name('post-store')->middleware('auth');
-    Route::get('/dashboard/showp','show')->name('show-p')->middleware('auth');
+        }})->name('del-pos')->middleware(App\Http\Middleware\Permission::class.':delete-post');
+    Route::post('/p','store')->name('post-store')->middleware('auth')->middleware(App\Http\Middleware\Permission::class.':create-post');
+    Route::get('/dashboard/showp','show')->name('show-p')->middleware('auth',App\Http\Middleware\Permission::class.':read-post');
     });
 // End PostController
 
@@ -59,12 +59,12 @@ Route::get('/cd/{cat}',function ($cat) {
     }else{
     $cat = Category::where('id', $cat)->delete();
     return redirect()->back()->with('success','deleted your category');
-    }})->name('del-cat');
-Route::get('/ce/{id}','edit')->name('edit-cat');
-Route::patch('/ce/{id}','update')->name('category-update');
-Route::get('/c','create')->name('cat-index')->middleware('auth');
-Route::get('/dashboard/showc','show')->name('show-c')->middleware('auth');
-Route::post('/c','store')->name('cat-store')->middleware('auth');
+    }})->name('del-cat')->middleware(App\Http\Middleware\Permission::class.':delete-category');
+Route::get('/ce/{id}','edit')->name('edit-cat')->middleware(App\Http\Middleware\Permission::class.':update-category');
+Route::patch('/ce/{id}','update')->name('category-update')->middleware(App\Http\Middleware\Permission::class.':update-category');
+Route::get('/c','create')->name('cat-index')->middleware('auth')->middleware(App\Http\Middleware\Permission::class.':create-category');
+Route::get('/dashboard/showc','show')->name('show-c')->middleware('auth')->middleware(App\Http\Middleware\Permission::class.':read-category');
+Route::post('/c','store')->name('cat-store')->middleware('auth')->middleware(App\Http\Middleware\Permission::class.':create-category');
 });
 // End CategoryController
 
@@ -84,8 +84,9 @@ Route::post('/Register',[RegisterController::class,'store'])->name('Register-sto
 
 // Start RoleController
 Route::controller( RoleController::class)->group(function(){
-        Route::get('/dashboard/roles','show')->name('show-r');
-        Route::post('/dashboard/roles','store')->name('role-store');
+        Route::get('/dashboard/roles','show')->name('show-r')
+        ->middleware(App\Http\Middleware\Permission::class.':read-role');
+        Route::post('/dashboard/roles','store')->name('role-store')->middleware(App\Http\Middleware\Permission::class.':create-role');
         Route::delete('/delete-role/{role}',function(Role $role){
             if(Auth::check() && Auth::user()->name == "yacn"){
                 $role->permissions()->detach();
@@ -96,9 +97,9 @@ Route::controller( RoleController::class)->group(function(){
             }else{
                 return redirect()->route('show-r')->with('error','403 you not access this action, oonly my owner Yacn1414');
             }
-        })->name('delete-role');
-        Route::get('/role-edit/{role}','edit')->name('role-edit');
-        Route::patch('/role-edit','update')->name('role-update');
+        })->name('delete-role')->middleware(App\Http\Middleware\Permission::class.':delete-role');
+        Route::get('/role-edit/{role}','edit')->name('role-edit')->middleware(App\Http\Middleware\Permission::class.':update-role');
+        Route::patch('/role-edit','update')->name('role-update')->middleware(App\Http\Middleware\Permission::class.':update-role');
 });
 // End RoleController
 require __DIR__.'/auth.php';
