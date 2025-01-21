@@ -12,6 +12,9 @@ use App\Http\Requests\PostUpdateRequest;
 
 class PostController extends Controller
 {
+    public function __construct(){
+        $this->authorize(Post::class, Post::class);
+    }
     public function create(){
         $category = Category::all();
         return view('posts.create',["category"=>$category]);

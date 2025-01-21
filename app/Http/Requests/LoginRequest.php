@@ -23,7 +23,7 @@ class LoginRequest extends FormRequest
     {
         return [
             'email'=>['email','string','max:50'],
-            'password'=>['string','min:6'],
+            'password'=>['string','min:3'],
         ];
     }
 }
