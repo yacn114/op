@@ -11,7 +11,9 @@
     </div>
 </div>
 <!-- Breadcrumb End -->
-
+@can('read-post')
+    you are a dickless
+@endcan
 <!-- Single News Start-->
 <div class="single-news">
     <div class="container">
@@ -137,13 +139,13 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="sidebar-widget">
                         <div class="image">
                             <a href="https://htmlcodex.com"><img src="img/ads-2.jpg" alt="Image"></a>
                         </div>
                     </div>
-                    
+
                     <div class="sidebar-widget">
                         <div class="tab-news">
                             <ul class="nav nav-pills nav-justified">
@@ -288,7 +290,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="sidebar-widget">
                         <div class="image">
                             <a href="https://htmlcodex.com"><img src="img/ads-2.jpg" alt="Image"></a>
@@ -315,7 +317,7 @@
                             <a href="https://htmlcodex.com"><img src="img/ads-2.jpg" alt="Image"></a>
                         </div>
                     </div>
-                    
+
                     <div class="sidebar-widget">
                         <h2 class="sw-title">Tags Cloud</h2>
                         <div class="tags">
@@ -333,5 +335,5 @@
         </div>
     </div>
 </div>
-<!-- Single News End-->  
+<!-- Single News End-->
 @endsection

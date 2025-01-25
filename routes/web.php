@@ -84,9 +84,10 @@ Route::post('/Register',[RegisterController::class,'store'])->name('Register-sto
 
 // Start RoleController
 Route::controller( RoleController::class)->group(function(){
-        Route::get('/dashboard/roles','show')->name('show-r')
-        ->middleware(App\Http\Middleware\Permission::class.':read-role');
-        Route::post('/dashboard/roles','store')->name('role-store')->middleware(App\Http\Middleware\Permission::class.':create-role');
+        Route::get('/dashboard/roles','show')->name('show-r');
+//        ->middleware(App\Http\Middleware\Permission::class.':read-role');
+        Route::post('/dashboard/roles','store')->name('role-store');
+//        ->middleware(App\Http\Middleware\Permission::class.':create-role');
         Route::delete('/delete-role/{role}',function(Role $role){
             if(Auth::check() && Auth::user()->name == "yacn"){
                 $role->permissions()->detach();
@@ -98,8 +99,11 @@ Route::controller( RoleController::class)->group(function(){
                 return redirect()->route('show-r')->with('error','403 you not access this action, oonly my owner Yacn1414');
             }
         })->name('delete-role')->middleware(App\Http\Middleware\Permission::class.':delete-role');
-        Route::get('/role-edit/{role}','edit')->name('role-edit')->middleware(App\Http\Middleware\Permission::class.':update-role');
-        Route::patch('/role-edit','update')->name('role-update')->middleware(App\Http\Middleware\Permission::class.':update-role');
+        Route::get('/role-edit/{role}','edit')->name('role-edit');
+//        ->middleware(App\Http\Middleware\Permission::class.':update-role');
+        Route::patch('/role-edit','update')->name('role-update');
+//        ->middleware(App\Http\Middleware\Permission::class.':update-role');
+
 });
 // End RoleController
 require __DIR__.'/auth.php';

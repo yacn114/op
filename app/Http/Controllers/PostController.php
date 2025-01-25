@@ -8,24 +8,23 @@ use App\Http\Requests\PostStoreRequest;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\PostUpdateRequest;
+use Illuminate\Support\Facades\Gate;
 
 
 class PostController extends Controller
 {
-    public function __construct(){
-        $this->authorize(Post::class, Post::class);
-    }
+
     public function create(){
         $category = Category::all();
         return view('posts.create',["category"=>$category]);
     }
     public function store(PostStoreRequest $request)
     {
-        $data = $request->validated(); // داده‌های تاییدشده از PostStoreRequest
+        $data = $request->validated();
         $data['user_id'] = Auth::id();
         $post = Post::create($data);
 
-     
+
         return back()->with('success', 'پست با موفقیت ایجاد شد.');
     }
     public function show(Post $post){
@@ -39,7 +38,7 @@ class PostController extends Controller
     }
     }
     public function update(PostUpdateRequest $request, Post $post){
-        
+
         if(Auth::user()->id == $post->user_id){
         $data = $request->validated();
         $data['user_id'] = Auth::id();
@@ -50,7 +49,11 @@ class PostController extends Controller
         }
     }
     public function sho(Post $post){
+        if (Gate::allows('read-post')){
         return view('posts.show',['post'=>$post]);
+        }else{
+            abort(403,"this post not yours {{".Auth::user()->name . "}}");
+        }
     }
 }
 
