@@ -16,7 +16,6 @@ class RolePolicy
      */
     public function viewAny(User $user): bool
     {
-
         return Auth::user()->role->HasPermission('read-role');
     }
 
