@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostStoreRequest;
 use App\Models\Category;
@@ -31,11 +32,15 @@ class PostController extends Controller
         return view('posts.post',['post'=>$post::all()]);
     }
     public function edit(Post $post){
+        if(Gate::allows('update-post')){
         if(Auth::user()->id == $post->user_id){
             return view('posts.edit',['post'=>$post]);
         }else{
         return back()->with('error','this post not yours');
     }
+        }else{
+            abort(403);
+        }
     }
     public function update(PostUpdateRequest $request, Post $post){
 
@@ -48,11 +53,12 @@ class PostController extends Controller
             return redirect()->route('show-p')->with('error','this post not yours');
         }
     }
-    public function sho(Post $post){
-        if (Gate::allows('read-post')){
+    public function sho(User $user,Post $post){
+        if ($user->can('view',$post)){
         return view('posts.show',['post'=>$post]);
         }else{
-            abort(403,"this post not yours {{".Auth::user()->name . "}}");
+            $username = Auth::check() ? Auth::user()->name : null;
+            abort(403,"this post not yours {{". $username . "}}");
         }
     }
 }

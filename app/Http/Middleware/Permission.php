@@ -17,13 +17,13 @@ class Permission
     public function handle(Request $request, Closure $next,$parametr): Response
     {
         $permission = Per::where("title",$parametr)->first();
-        $a = !Auth::check() || !Auth::user()->role->HasPermission($permission);
+        $a = !Auth::check() && !Auth::user()->role->HasPermission($permission);
         if($a){
             abort(403);
         }else{
             null;
         }
-             
+
         return $next($request);
     }
 }
