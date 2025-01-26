@@ -18,10 +18,11 @@ class Permission
     {
         $permission = Per::where("title",$parametr)->first();
         $a = !Auth::check() && !Auth::user()->role->HasPermission($permission);
+        // dd($a);
         if($a){
-            abort(403);
-        }else{
             null;
+        }else{
+            abort(403);
         }
 
         return $next($request);

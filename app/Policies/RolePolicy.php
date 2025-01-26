@@ -50,7 +50,7 @@ class RolePolicy
         return Auth::check() &&
             $this->getUsername() &&
             $this->getUsername()->role &&
-            $this->getUsername()->role->HasPermission(['update-role', 'edit-role']);
+            $this->getUsername()->role->HasPermission('update-role');
 
 
     }

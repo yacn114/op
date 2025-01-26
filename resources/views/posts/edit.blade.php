@@ -62,7 +62,7 @@
                         </select>
                         
                         <div class="flex items-center gap-4">
-                            <x-primary-button>{{ "create" }}</x-primary-button>
+                            <x-primary-button>{{ "update" }}</x-primary-button>
                 
                         </div>
                     </form>

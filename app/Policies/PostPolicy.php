@@ -24,8 +24,9 @@ class PostPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Post $post): bool
+    public function view(): bool
     {
+        
         return $this->getUsername() &&
             $this->getUsername()->role->HasPermission('read-post');
     }
@@ -35,7 +36,8 @@ class PostPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $this->getUsername()&&
+        $this->getUsername()->role->HasPermission('create-post');
     }
 
     /**
@@ -43,7 +45,9 @@ class PostPolicy
      */
     public function update(User $user, Post $post): bool
     {
-        return false;
+        
+        return $this->getUsername() &&
+        $this->getUsername()->role->HasPermission(['create-post','update-post']);
     }
 
     /**

@@ -39,7 +39,9 @@ $permission = Permission::all();
             </div>    
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                    @canany(['create','view'],App\Models\Post::class)
 
+           
        
             <section>
                 <header>
@@ -87,6 +89,10 @@ $permission = Permission::all();
                     </div>
                 </form>
             </section>
+            @else
+            <h1>you can`t create post</h1>
+            @endcanany
+           
         </div>
     </div>
     

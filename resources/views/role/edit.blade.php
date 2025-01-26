@@ -39,7 +39,7 @@ $permission = Permission::all();
                 </div>
         
                 
-                <div class="flex flex-wrap gap-4 mt-4">
+                <div class="flex flex-wrap gap-4 mt-4" style="display:block">
                     @foreach ($permission as $permissions)
                     <label class="flex items-center">
                         <input id="name" name="Permission[]"

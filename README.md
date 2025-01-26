@@ -10,5 +10,5 @@ a simple blog with laravel <a href="https://t.me/yacn_1414">yacn_1414</a>
 
 
 <li>single post and posts on home page...</li>
-
+<li>بهینه کردن HasPermission</li>
 </ul>

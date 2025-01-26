@@ -34,10 +34,12 @@ Route::get('/','index')->name('home');
 
 // Start PostController
 Route::controller(PostController::class)->group(function () {
-    Route::get('/p','create')->name('post-index')->middleware('auth', App\Http\Middleware\Permission::class.':create-post');
+    Route::get('/p','create')->name('post-index')->middleware(App\Http\Middleware\Permission::class.':create-post');
     Route::get('/p/{post}','sho')->name('single');
-    Route::get('/pe/{post}','edit')->name('edit-post')->middleware(App\Http\Middleware\Permission::class.':update-post');
-    Route::patch('/pe/{post}','update')->name('post-update')->middleware(App\Http\Middleware\Permission::class.':update-post');
+    Route::get('/pe/{post}','edit')->name('edit-post');
+    // middleware(App\Http\Middleware\Permission::class.':update-post');
+    Route::patch('/pe/{post}','update')->name('post-update');
+    // ->middleware(App\Http\Middleware\Permission::class.':update-post');
     Route::get('/pd/{post}',function ($post ) {
         $post = Post::where('id', $post)->first();
         if (Auth::check() && Auth::user()->id == $post->user_id) {
@@ -46,8 +48,9 @@ Route::controller(PostController::class)->group(function () {
         }else{
             return redirect()->back()->with('error','this post not yours, you cant delete this post');
         }})->name('del-pos')->middleware(App\Http\Middleware\Permission::class.':delete-post');
-    Route::post('/p','store')->name('post-store')->middleware('auth')->middleware(App\Http\Middleware\Permission::class.':create-post');
-    Route::get('/dashboard/showp','show')->name('show-p')->middleware('auth',App\Http\Middleware\Permission::class.':read-post');
+    Route::post('/p','store')->name('post-store')->middleware(App\Http\Middleware\Permission::class.':create-post');
+    Route::get('/dashboard/showp','show')->name('show-p');
+    
     });
 // End PostController
 
